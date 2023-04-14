@@ -57,7 +57,8 @@ class ExceptionApiControllerTest {
             this.age = 11
             this.phoneNumber = "010-1111-2222"
         }
-
+        // userRequest를 json 형태로 바꿔줘야함 . 테스트 코드 시에 accept를 application/json 형태로 받기 때문
+        // 하단에서 object를 json 형태로 바꿔준다.
         val json = jacksonObjectMapper().writeValueAsString(userRequest)
 
         mockMvc.perform(
