@@ -28,6 +28,11 @@ import javax.validation.constraints.Size
 @Validated
 class ExceptionApiController {
 
+    @GetMapping("/hello")
+    fun hello(): String {
+        return "hello"
+    }
+
     @GetMapping("")
     fun get(
         @NotBlank
@@ -46,7 +51,8 @@ class ExceptionApiController {
     fun post(
         @Valid @RequestBody
         userRequest: UserRequest,
-    ) {
+    ): UserRequest {
+        return userRequest
     }
 
     @ExceptionHandler(value = [MethodArgumentNotValidException::class])
@@ -108,13 +114,6 @@ class ExceptionApiController {
         }
 
         return ResponseEntity.badRequest().body(errorResponse)
-    }
-
-    @GetMapping("/hello")
-    fun hello() {
-        if (true) {
-            throw RuntimeException("강제 exception")
-        }
     }
 
     // 클래스 내부에서 예외 처리를 해줘도 되고, 만약 전역으로 관리할 예외 처리가 필요하다면
